@@ -3,7 +3,10 @@ import React, {Component} from "react";
 import {connect} from 'react-redux'
 import {handleInitialData} from "../actions/shared";
 import Navigator from "./Navigator";
+import Router from "./Router";
 import {CssBaseline, withStyles} from "@material-ui/core";
+import {BrowserRouter} from "react-router-dom";
+import Snackbar from "./Snackbar";
 
 
 class App extends Component {
@@ -17,7 +20,11 @@ class App extends Component {
         return (
             <div className={classes.root}>
                 <CssBaseline/>
-                <Navigator/>
+                <BrowserRouter>
+                    <Navigator/>
+                    <Router/>
+                    <Snackbar/>
+                </BrowserRouter>
             </div>
         )
     }

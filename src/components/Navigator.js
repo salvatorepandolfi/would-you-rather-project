@@ -1,4 +1,5 @@
-import React, {Component} from "react";
+import React, {Component, Fragment} from "react";
+import {withRouter} from 'react-router-dom'
 import clsx from 'clsx'
 import {
     Button,
@@ -37,7 +38,7 @@ class Navigator extends Component {
         const {classes, authedUser} = this.props
         const {open} = this.state
         return (
-            <div className={classes.root}>
+            <Fragment>
                 <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
                     <Toolbar className={classes.toolbar}>
                         <IconButton
@@ -58,7 +59,8 @@ class Navigator extends Component {
                             WOULD YOU RATHER?
                         </Typography>
                         {this.props.authedUser === null
-                            ? (<Button color="inherit">Login</Button>)
+                            ? (<Button color="inherit"
+                                       onClick={() => (this.props.history.push('/login'))}>Login</Button>)
                             : (<Avatar><AccountCircle/> </Avatar>)
                         }
                     </Toolbar>
@@ -77,32 +79,30 @@ class Navigator extends Component {
                     </div>
                     <Divider/>
                     <List>
-                        <ListItem button>
+                        <ListItem button onClick={() => (this.props.history.push('/'))}>
                             <ListItemIcon>
                                 <Home/>
                             </ListItemIcon>
-                            <ListItemText primary="HOME">
+                            <ListItemText primary="Home">
                             </ListItemText>
                         </ListItem>
-                        <ListItem button>
+                        <ListItem button onClick={() => (this.props.history.push('/new'))}>
                             <ListItemIcon>
                                 <AddComment/>
                             </ListItemIcon>
-                            <ListItemText primary="NEW QUESTION">
-
+                            <ListItemText primary="New Question">
                             </ListItemText>
                         </ListItem>
-                        <ListItem button>
+                        <ListItem button onClick={() => (this.props.history.push('/leaderBoard'))}>
                             <ListItemIcon>
                                 <FormatListNumbered/>
                             </ListItemIcon>
-                            <ListItemText primary="LEADER BOARD">
-
+                            <ListItemText primary="Leader Board">
                             </ListItemText>
                         </ListItem>
                     </List>
                 </Drawer>
-            </div>
+            </Fragment>
         )
 
     }
@@ -110,6 +110,7 @@ class Navigator extends Component {
 
 function mapStateToProps({authedUser, users}) {
 
+    //TODO add the user image in the avatar
     return {
         authedUser: authedUser !== null ? users[authedUser] : authedUser
     }
@@ -118,9 +119,6 @@ function mapStateToProps({authedUser, users}) {
 const drawerWidth = 240;
 
 const useStyles = theme => ({
-    root: {
-        display: 'flex',
-    },
     toolbar: {
         paddingRight: 24, // keep right padding when drawer closed
     },
@@ -174,27 +172,8 @@ const useStyles = theme => ({
         [theme.breakpoints.up('sm')]: {
             width: theme.spacing(9),
         },
-    },
-    appBarSpacer: theme.mixins.toolbar,
-    content: {
-        flexGrow: 1,
-        height: '100vh',
-        overflow: 'auto',
-    },
-    container: {
-        paddingTop: theme.spacing(4),
-        paddingBottom: theme.spacing(4),
-    },
-    paper: {
-        padding: theme.spacing(2),
-        display: 'flex',
-        overflow: 'auto',
-        flexDirection: 'column',
-    },
-    fixedHeight: {
-        height: 240,
-    },
+    }
 })
 
 
-export default withStyles(useStyles)(connect(mapStateToProps)(Navigator))
+export default withRouter(withStyles(useStyles)(connect(mapStateToProps)(Navigator)))
