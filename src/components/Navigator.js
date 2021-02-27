@@ -14,13 +14,15 @@ import {
     List,
     ListItem,
     ListItemIcon,
-    ListItemText
+    ListItemText,
+
 } from '@material-ui/core'
 import {connect} from 'react-redux'
 import {
     Menu as MenuIcon,
     ChevronLeft as ChevronLeftIcon, AccountCircle, Home, AddComment, FormatListNumbered
 } from "@material-ui/icons";
+import {deepOrange} from "@material-ui/core/colors";
 
 
 class Navigator extends Component {
@@ -58,10 +60,26 @@ class Navigator extends Component {
                             className={classes.title}>
                             WOULD YOU RATHER?
                         </Typography>
-                        {this.props.authedUser === null
+                        {authedUser === null
                             ? (<Button color="inherit"
                                        onClick={() => (this.props.history.push('/login'))}>Login</Button>)
-                            : (<Avatar><AccountCircle/> </Avatar>)
+                            : (
+                                <Fragment>
+                                    {authedUser.avatarURL
+                                        ? (
+                                            <Avatar alt={authedUser.name} src={authedUser.avatarURL}/>
+                                        )
+                                        : (
+                                            <Avatar alt={authedUser.name} className={classes.avatarColor}>
+                                                {authedUser.name.match(/\b(\w)/g).join('')}
+                                            </Avatar>
+                                        )
+                                    }
+                                    <Typography className={classes.username}>
+                                        {authedUser.name}
+                                    </Typography>
+                                </Fragment>
+                            )
                         }
                     </Toolbar>
                 </AppBar>
@@ -172,7 +190,14 @@ const useStyles = theme => ({
         [theme.breakpoints.up('sm')]: {
             width: theme.spacing(9),
         },
-    }
+    },
+    username: {
+        marginLeft: theme.spacing(2)
+    },
+    avatarColor: {
+        color: theme.palette.getContrastText(deepOrange[500]),
+        backgroundColor: deepOrange[500],
+    },
 })
 
 
