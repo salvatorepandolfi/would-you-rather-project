@@ -33,6 +33,7 @@ class App extends Component {
 const useStyles = theme => ({
     root: {
         display: 'flex',
+        backgroundColor: '#212121'
     }
 })
 

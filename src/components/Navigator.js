@@ -23,6 +23,7 @@ import {
     ChevronLeft as ChevronLeftIcon, Home, AddComment, FormatListNumbered
 } from "@material-ui/icons";
 import {deepOrange} from "@material-ui/core/colors";
+import UserAvatar from "./UserAvatar";
 
 
 class Navigator extends Component {
@@ -64,21 +65,15 @@ class Navigator extends Component {
                             ? (<Button color="inherit"
                                        onClick={() => (this.props.history.push('/login'))}>Login</Button>)
                             : (
-                                <Fragment>
-                                    {authedUser.avatarURL
-                                        ? (
-                                            <Avatar alt={authedUser.name} src={authedUser.avatarURL}/>
-                                        )
-                                        : (
-                                            <Avatar alt={authedUser.name} className={classes.avatarColor}>
-                                                {authedUser.name.match(/\b(\w)/g).join('')}
-                                            </Avatar>
-                                        )
+                                <UserAvatar
+                                    user={authedUser}
+                                    classes={
+                                        {
+                                            avatar: '',
+                                            avatarColor: classes.avatarColor
+                                        }
                                     }
-                                    <Typography className={classes.username}>
-                                        {authedUser.name}
-                                    </Typography>
-                                </Fragment>
+                                />
                             )
                         }
                     </Toolbar>
@@ -198,6 +193,7 @@ const useStyles = theme => ({
         color: theme.palette.getContrastText(deepOrange[500]),
         backgroundColor: deepOrange[500],
     },
+    avatar: {},
 })
 
 
