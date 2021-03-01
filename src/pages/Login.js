@@ -32,12 +32,18 @@ class Login extends Component {
 
     handleSubmit = (e) => {
         e.preventDefault()
-        const {dispatch} = this.props;
-        if (this.state.selectedUser === '') {
+        const {dispatch, users} = this.props;
+        const {selectedUser} = this.state
+        if (selectedUser === '') {
             dispatch(showMessage('Please select an user to login', 'error'))
         } else {
-            dispatch(showMessage(`Wellcome back`))
-            dispatch(loginUser(this.state.selectedUser))
+            const user = users.find(u => u.id === selectedUser)
+            if (user) {
+                dispatch(showMessage(`Welcome back ${user.name}`))
+                dispatch(loginUser(selectedUser))
+            } else {
+                dispatch(showMessage('An error occurred trying to login...', 'error'))
+            }
         }
     }
 

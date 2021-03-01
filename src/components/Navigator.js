@@ -20,7 +20,7 @@ import {
 import {connect} from 'react-redux'
 import {
     Menu as MenuIcon,
-    ChevronLeft as ChevronLeftIcon, AccountCircle, Home, AddComment, FormatListNumbered
+    ChevronLeft as ChevronLeftIcon, Home, AddComment, FormatListNumbered
 } from "@material-ui/icons";
 import {deepOrange} from "@material-ui/core/colors";
 
