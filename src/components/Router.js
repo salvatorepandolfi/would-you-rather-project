@@ -10,6 +10,7 @@ import LeaderBoard from "../pages/LeaderBoard";
 import FourOFour from "../pages/FourOFour";
 
 class Router extends Component {
+    //TODO add logout functionality
     render() {
         const {classes, authedUser} = this.props
         return (
@@ -22,37 +23,13 @@ class Router extends Component {
                     : (
                         <Fragment>
                             <Route path='/' exact component={Home}/>
-                            <Route path='/login' component={Login}/>
-                            <Route path='/add' exact>
-                                {!authedUser
-                                    ? (<Redirect to='/login'/>)
-                                    : (<New/>)
-                                }
+                            <Route path='/login'>
+                                <Redirect to='/'/>
                             </Route>
-                            <Route path='/question/:question_id' exact>
-                                {!authedUser
-                                    ? (<Redirect to='/login'/>)
-                                    : (<Question/>)
-                                }
-                            </Route>
-                            <Route path='/new' exact>
-                                {!authedUser
-                                    ? (<Redirect to='/login'/>)
-                                    : (<New/>)
-                                }
-                            </Route>
-                            <Route path='/leaderBoard' exact>
-                                {!authedUser
-                                    ? (<Redirect to='/login'/>)
-                                    : (<LeaderBoard/>)
-                                }
-                            </Route>
-                            <Route path='/404' exact>
-                                {!authedUser
-                                    ? (<Redirect to='/login'/>)
-                                    : (<FourOFour/>)
-                                }
-                            </Route>
+                            <Route path='/add' component={New}/>
+                            <Route path='/question/:question_id' component={Question}/>
+                            <Route path='/leaderBoard' component={LeaderBoard}/>
+                            <Route path='/404' component={FourOFour}/>
                         </Fragment>
                     )
                 }

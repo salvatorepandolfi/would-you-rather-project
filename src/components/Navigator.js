@@ -99,7 +99,7 @@ class Navigator extends Component {
                             <ListItemText primary="Home">
                             </ListItemText>
                         </ListItem>
-                        <ListItem button onClick={() => (this.props.history.push('/new'))}>
+                        <ListItem button onClick={() => (this.props.history.push('/add'))}>
                             <ListItemIcon>
                                 <AddComment/>
                             </ListItemIcon>
