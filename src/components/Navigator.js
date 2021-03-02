@@ -15,6 +15,8 @@ import {
     ListItem,
     ListItemIcon,
     ListItemText,
+    Menu,
+    MenuItem,
 
 } from '@material-ui/core'
 import {connect} from 'react-redux'
@@ -24,22 +26,42 @@ import {
 } from "@material-ui/icons";
 import {deepOrange} from "@material-ui/core/colors";
 import UserAvatar from "./UserAvatar";
+import {logout} from "../actions/authedUser";
 
 
 class Navigator extends Component {
 
     state = {
-        open: true
+        open: true,
+        avatarElement: undefined,
     }
 
     toggleDrawer = () => {
-        this.setState(({open}) => ({open: !open}), () => {
+        this.setState(({open}) => ({open: !open}))
+    }
+
+    toogleAvatarMenu = (e) => {
+        e.preventDefault()
+        this.setState(({avatarElement}) => ({
+            avatarElement: avatarElement === undefined ? e.target : undefined
+        }))
+    }
+
+    closeAvatarMenu = () => {
+        this.setState({
+            avatarElement: false
         })
     }
 
+    logout = () => {
+        this.props.dispatch(logout())
+        this.props.history.push('/login')
+    }
+
+
     render() {
         const {classes, authedUser} = this.props
-        const {open} = this.state
+        const {open, avatarElement} = this.state
         return (
             <Fragment>
                 <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
@@ -65,15 +87,26 @@ class Navigator extends Component {
                             ? (<Button color="inherit"
                                        onClick={() => (this.props.history.push('/login'))}>Login</Button>)
                             : (
-                                <UserAvatar
-                                    user={authedUser}
-                                    classes={
-                                        {
-                                            avatar: '',
-                                            avatarColor: classes.avatarColor
+                                <Button onClick={this.toogleAvatarMenu}>
+                                    <UserAvatar
+                                        user={authedUser}
+                                        classes={
+                                            {
+                                                avatar: '',
+                                                avatarColor: classes.avatarColor
+                                            }
                                         }
-                                    }
-                                />
+                                    />
+                                    <Menu
+                                        open={Boolean(avatarElement)}
+                                        anchorEl={avatarElement}
+                                        onClose={this.closeAvatarMenu}
+                                    >
+                                        <MenuItem onClick={this.logout}>Logout</MenuItem>
+                                    </Menu>
+
+                                </Button>
+
                             )
                         }
                     </Toolbar>
