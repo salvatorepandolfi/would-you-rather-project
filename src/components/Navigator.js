@@ -15,8 +15,8 @@ import {
     ListItem,
     ListItemIcon,
     ListItemText,
-    Menu,
     MenuItem,
+    Popover,
 
 } from '@material-ui/core'
 import {connect} from 'react-redux'
@@ -97,13 +97,21 @@ class Navigator extends Component {
                                             }
                                         }
                                     />
-                                    <Menu
+                                    <Popover
                                         open={Boolean(avatarElement)}
                                         anchorEl={avatarElement}
                                         onClose={this.closeAvatarMenu}
+                                        anchorOrigin={{
+                                            vertical: 'bottom',
+                                            horizontal: 'center',
+                                        }}
+                                        transformOrigin={{
+                                            vertical: 'top',
+                                            horizontal: 'center',
+                                        }}
                                     >
                                         <MenuItem onClick={this.logout}>Logout</MenuItem>
-                                    </Menu>
+                                    </Popover>
 
                                 </Button>
 
