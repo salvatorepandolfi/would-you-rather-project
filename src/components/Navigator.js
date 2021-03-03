@@ -5,7 +5,6 @@ import {
     Button,
     AppBar,
     Toolbar,
-    Avatar,
     Typography,
     IconButton,
     Drawer,
@@ -162,7 +161,7 @@ class Navigator extends Component {
     }
 }
 
-function mapStateToProps({authedUser, users}) {
+const mapStateToProps = ({authedUser, users}) => {
 
     //TODO add the user image in the avatar
     return {

@@ -61,7 +61,7 @@ const useStyles = theme => ({
     },
 })
 
-function mapStateToProps({authedUser}) {
+const mapStateToProps = ({authedUser}) => {
     return {
         authedUser
     }
