@@ -2,7 +2,6 @@ import React from "react";
 import QuestionSummary from "./QuestionSummary";
 import {Card, CardHeader, Container} from "@material-ui/core";
 
-
 export default function QuestionList(props) {
     const {questionIds} = props
     return (
