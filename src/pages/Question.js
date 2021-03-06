@@ -16,7 +16,7 @@ class Question extends Component {
                         ? <FourOFour/>
                         : question.userAnswer
                             ? <AnsweredQuestion question={question}/>
-                            : <UnansweredQuestion/>
+                            : <UnansweredQuestion question={question}/>
                     }
                 </Paper>
             </Container>
@@ -35,7 +35,6 @@ const mapStateToProps = ({questions, users, authedUser}, {match}) => {
             totalAnswers: question.optionOne.votes.length + question.optionTwo.votes.length,
             author: users[question.author]
         } : undefined
-
     }
 }
 const useStyles = theme => ({
