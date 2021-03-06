@@ -86,34 +86,38 @@ class Navigator extends Component {
                             ? (<Button color="inherit"
                                        onClick={() => (this.props.history.push('/login'))}>Login</Button>)
                             : (
-                                <Button onClick={this.toogleAvatarMenu}>
-                                    <UserAvatar
-                                        user={authedUser}
-                                        classes={
-                                            {
-                                                avatar: '',
-                                                avatarColor: classes.avatarColor
+                                <Fragment>
+                                    <Typography>
+                                        {authedUser.name}
+                                    </Typography>
+                                    <Button onClick={this.toogleAvatarMenu}>
+                                        <UserAvatar
+                                            user={authedUser}
+                                            classes={
+                                                {
+                                                    avatar: '',
+                                                    avatarColor: classes.avatarColor
+                                                }
                                             }
-                                        }
-                                    />
-                                    <Popover
-                                        open={Boolean(avatarElement)}
-                                        anchorEl={avatarElement}
-                                        onClose={this.closeAvatarMenu}
-                                        anchorOrigin={{
-                                            vertical: 'bottom',
-                                            horizontal: 'center',
-                                        }}
-                                        transformOrigin={{
-                                            vertical: 'top',
-                                            horizontal: 'center',
-                                        }}
-                                    >
-                                        <MenuItem onClick={this.logout}>Logout</MenuItem>
-                                    </Popover>
+                                        />
+                                        <Popover
+                                            open={Boolean(avatarElement)}
+                                            anchorEl={avatarElement}
+                                            onClose={this.closeAvatarMenu}
+                                            anchorOrigin={{
+                                                vertical: 'bottom',
+                                                horizontal: 'center',
+                                            }}
+                                            transformOrigin={{
+                                                vertical: 'top',
+                                                horizontal: 'center',
+                                            }}
+                                        >
+                                            <MenuItem onClick={this.logout}>Logout</MenuItem>
+                                        </Popover>
 
-                                </Button>
-
+                                    </Button>
+                                </Fragment>
                             )
                         }
                     </Toolbar>
@@ -162,8 +166,6 @@ class Navigator extends Component {
 }
 
 const mapStateToProps = ({authedUser, users}) => {
-
-    //TODO add the user image in the avatar
     return {
         authedUser: authedUser !== null ? users[authedUser] : authedUser
     }
