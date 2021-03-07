@@ -1,5 +1,5 @@
 import React, {Component, Fragment} from "react";
-import {Route, Redirect} from "react-router-dom";
+import {Route, Redirect, Switch} from "react-router-dom";
 import {withStyles} from "@material-ui/core";
 import {connect} from 'react-redux'
 import Login from "../pages/Login";
@@ -10,7 +10,6 @@ import LeaderBoard from "../pages/LeaderBoard";
 import FourOFour from "../pages/FourOFour";
 
 class Router extends Component {
-    //TODO add logout functionality
     render() {
         const {classes, authedUser} = this.props
         return (
@@ -22,14 +21,18 @@ class Router extends Component {
                     ? (<Route path='/' component={Login}/>)
                     : (
                         <Fragment>
-                            <Route path='/' exact component={Home}/>
-                            <Route path='/login'>
-                                <Redirect to='/'/>
-                            </Route>
-                            <Route path='/add' component={New}/>
-                            <Route path='/question/:question_id' component={Question}/>
-                            <Route path='/leaderBoard' component={LeaderBoard}/>
-                            <Route path='/404' component={FourOFour}/>
+                            <Switch>
+
+                                <Route path='/' exact component={Home}/>
+                                <Route path='/login'>
+                                    <Redirect to='/'/>
+                                </Route>
+                                <Route path='/add' exact component={New}/>
+                                <Route path='/question/:question_id' component={Question}/>
+                                <Route path='/leaderBoard' exact component={LeaderBoard}/>
+                                <Route path='/404' exact component={FourOFour}/>
+                                <Route component={FourOFour}/>
+                            </Switch>
                         </Fragment>
                     )
                 }

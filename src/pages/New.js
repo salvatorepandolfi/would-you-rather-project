@@ -136,6 +136,9 @@ const useStyles = theme => ({
     container: {
         marginTop: theme.spacing(2),
     },
+    header: {
+        textAlign: 'center'
+    },
     paper: {
         padding: theme.spacing(2),
         marginTop: theme.spacing(2),
