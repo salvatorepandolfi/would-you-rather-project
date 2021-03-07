@@ -6,7 +6,7 @@ import {connect} from 'react-redux'
 
 class Home extends Component {
     state = {
-        tab: 'answered'
+        tab: 'unaswered'
     }
     changeTab = (e, value) => {
         e.preventDefault()
@@ -26,8 +26,8 @@ class Home extends Component {
                         textColor="primary"
                         variant="fullWidth"
                     >
-                        <Tab label="Answered" value="answered"/>
                         <Tab label="Unanswered" value="unaswered"/>
+                        <Tab label="Answered" value="answered"/>
                     </Tabs>
                     <TabPanel role="tabpanel" value="answered" index={0}>
                         <QuestionList
